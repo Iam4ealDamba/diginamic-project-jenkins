@@ -1,16 +1,27 @@
 pipeline {
   agent any
   stages {
+    stage ('Initialize') {
+      steps {
+        git 'https://github.com/Iam4ealDamba/diginamic-project-jenkins.git'
+      }
+    }
     stage('Build') {
       steps {
         echo 'Building..'
-        // Add your build steps here
+        sh 'mvn clean compile'
       }
     }
     stage('Test') {
       steps {
         echo 'Testing..'
-        // Add your test steps here
+        sh 'mvn test'
+      }
+    }
+    stage('Create Package') {
+      steps {
+        echo 'Create Package..'
+        sh 'mvn install'
       }
     }
     stage('Deploy') {
