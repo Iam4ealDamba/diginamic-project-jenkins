@@ -1,0 +1,46 @@
+# --------------------------
+# Services
+# -------------------------- 
+services:
+  # Jenkins Services 
+  digi-jenkins:
+    image: jenkins/jenkins:jdk17
+    container_name: project-jenkins
+    restart: unless-stopped
+    ports:
+      - "${JENKINS_PORT}:8080"
+      - "50000:50000"
+    volumes: 
+      - project-jenkins_home:/var/jenkins_home
+    networks:
+      - jenkins
+
+  # Sonarqube Services
+  digi-sonarqube:
+    image: sonarqube:latest
+    container_name: project-sonarqube
+    restart: unless-stopped
+    ports:
+      - "${SONARQUBE_PORT}:9000"
+    volumes:
+      - project-sonarqube_data:/opt/sonarqube/data
+      - project-sonarqube_extensions:/opt/sonarqube/extensions
+      - project-sonarqube_logs:/opt/sonarqube/logs
+    networks:
+      - jenkins
+# --------------------------
+# Volumes
+# -------------------------- 
+volumes:
+  project-jenkins_home:
+  project-sonarqube_data:
+  project-sonarqube_extensions:
+  project-sonarqube_logs:
+# --------------------------
+# Networks
+# -------------------------- 
+networks:
+  jenkins:
+    driver: bridge
+    external: true
+      
