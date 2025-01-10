@@ -4,11 +4,6 @@ pipeline {
     maven 'Maven 3.9.9'
   }
   stages {
-    stage ('Initialize') {
-      steps {
-        git 'https://github.com/Iam4ealDamba/diginamic-project-jenkins.git'
-      }
-    }
     stage('Build') {
       steps {
         echo 'Building..'
