@@ -18,6 +18,6 @@ pipeline {
         echo 'Deploying..'
         // Add your deploy steps here
       }
-    }}
+    }
   }
 }
