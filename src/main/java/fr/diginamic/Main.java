@@ -8,7 +8,7 @@ import fr.diginamic.components.FileGenerator;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        FileGenerator fileGenerator = new FileGenerator();
+        FileGenerator fileGenerator = new FileGenerator(Main.class);
         Optional<List<String>> words = fileGenerator.readFile1();
 
         if (words.isPresent()) {

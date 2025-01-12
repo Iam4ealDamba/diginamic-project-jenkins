@@ -1,16 +1,40 @@
 package fr.diginamic.components;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class FileGenerator {
-  String path = "src/main/resources/";
-  File file1 = new File(path, "test1.txt");
+  String baseResUrl;
+  File file1;
+
+  public FileGenerator(Class<?> clazz) throws IOException {
+    URL resource = clazz.getClassLoader().getResource(".");
+    if (resource != null) {
+      this.baseResUrl = resource.getPath();
+
+    } else {
+      this.baseResUrl = ".";
+    }
+
+    this.file1 = new File(baseResUrl, "test1.txt");
+
+    String txt = "Bonjour le monde !";
+    if (!file1.exists()) {
+      System.out.println("File created: " + file1.getName());
+      file1.createNewFile();
+      BufferedWriter writer = new BufferedWriter(new FileWriter(file1));
+      writer.write(txt);
+      writer.close();
+    }
+  }
 
   @SuppressWarnings("resource")
   public Optional<List<String>> readFile1() throws IOException {

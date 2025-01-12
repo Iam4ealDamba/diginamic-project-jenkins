@@ -23,5 +23,28 @@
         </dependency>
 
     </dependencies>
+    <build>
+        <testSourceDirectory>src/test/java</testSourceDirectory>
+        <testOutputDirectory>target/test-classes</testOutputDirectory>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+            </testResource>
+        </testResources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>fr.diginamic.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
